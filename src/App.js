@@ -1,23 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import './style/App.scss';
+import RButton from './components/UI/button/RButton';
+import RInput from './components/UI/input/RInput';
+import RItem from './components/UI/item/RItem';
+import { useReducer, useState } from 'react';
 
 function App() {
+
+  const [user, setUser] = useState({ name: '', surname: '' })
+  const [users, setUsers] = useState([{ name: 'Roman', surname: 'Bobchik' }, { name: 'Andry', surname: 'Black' }])
+
+  const createUser = () => {
+    console.log('User', user)
+  }
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className='container'>
+        <RInput type='text' placeholder="Name" value={user.name} onChange={e => setUser({ ...user, name: e.target.value })}></RInput>
+        <RInput type='text' placeholder="Surname" value={user.surname} onChange={e => setUser({ ...user, surname: e.target.value })}></RInput>
+        <RButton onClick={createUser}>Send</RButton>
+      </div>
+      <RItem users={users}></RItem>
     </div>
   );
 }
