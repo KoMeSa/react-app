@@ -1,6 +1,11 @@
 .rItem {
     box-sizing: border-box;
     font-size: 20px;
+    margin-bottom: 15px;
+    border: 1px solid grey;
+    border-radius: 8px;
     color: black;
-    background: #445664;
+    padding: 20px 10px;
+    display: flex; 
+    justify-content: space-around;
 }
