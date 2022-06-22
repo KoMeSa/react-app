@@ -1,10 +1,9 @@
-import classes from './RItem.module.scss'
-import RButton from '../button/RButton';
+import RButton from './UI/button/RButton';
 
 
 const RUser = ({ user, remove }) => {
     return (
-        <div className={classes.rItem}>
+        <div>
             <span>{user.id}.</span>
             <span>{user.name}</span>
             <span>{user.surname}</span>

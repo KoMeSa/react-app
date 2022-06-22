@@ -10,3 +10,21 @@
     padding: 20px;
 }
 
+
+.user-enter {
+    transform: translate(-350px);
+}
+
+.user-enter-active {
+    transform: translate(0px);
+    transition: all 500ms ease-in;
+}
+
+.user-exit {
+    opacity: 1;
+}
+
+.user-exit-active {
+    transform: translate(-350px);
+    transition: all 500ms ease-in;
+}
