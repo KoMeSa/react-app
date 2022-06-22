@@ -3,6 +3,12 @@ import RUser from '../item/RUser'
 
 
 const RUserList = ({ users, remove }) => {
+
+    if(!users.length){
+        return (
+            <h1>No users found</h1>
+        )
+    }
     return (
         <div className={classes.list}>
             <h1>List of user</h1>
