@@ -5,11 +5,13 @@ import './style/App.scss';
 
 function App() {
   return (
-    <Routes>
-      <Route />
-      <Route path="/" element={<Users />} />
-      <Route path="/posts" element={<Posts />} />
-    </Routes>
+    <div className='App'>
+      <Routes>
+        <Route />
+        <Route path="/" element={<Users />} />
+        <Route path="/posts" element={<Posts />} />
+      </Routes>
+    </div>
   )
 
 }

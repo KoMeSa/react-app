@@ -37,11 +37,10 @@ function User() {
     }
 
     return (
-        <div className="App">
+        <div>
             <RModal visible={modal} setVisible={setModal}>
                 <UserForm create={createUser}></UserForm>
             </RModal>
-            <hr />
             <div className='container'>
                 <RButton onClick={() => setModal(true)}>Crete user</RButton>
                 <UserFilter filter={filter} setFilter={setFilter} />
