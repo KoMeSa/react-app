@@ -3,17 +3,29 @@ import RUserList from './components/RUserList';
 import RButton from './components/UI/button/RButton';
 import UserForm from './components/UserForm';
 import UserFilter from './components/UserFilter';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import RModal from './components/UI/modal/RModal';
 import { useUsers } from './hooks/useUsers'
+import UserService from './API/UserService'
+// import axios from 'axios'
 
 function App() {
 
-  const [users, setUsers] = useState([{ id: 1, name: 'Roman', surname: 'Bobchik' }, { id: 2, name: 'Andry', surname: 'Black' }, { id: 3, name: 'fffff', surname: 'AsAs' }])
+  const [users, setUsers] = useState([])
   const [filter, setFilter] = useState({ sort: '', query: '' })
   const [modal, setModal] = useState(false)
-
+  //hook to filter users
   const sortedAndSearchedUsers = useUsers(users, filter.sort, filter.query)
+
+  useEffect(() => {
+    fetchUsers();
+  }, [])
+
+  async function fetchUsers() {
+    const data = await UserService.getUsers();
+    setUsers(data)
+  }
+
 
   const createUser = (newUser) => {
     setUsers([...users, newUser])
@@ -31,7 +43,7 @@ function App() {
       </RModal>
       <hr />
       <div className='container'>
-        <RButton onClick={()=>setModal(true)}>Crete user</RButton>
+        <RButton onClick={() => setModal(true)}>Crete user</RButton>
         <UserFilter filter={filter} setFilter={setFilter} />
       </div>
       <div className='container'>
