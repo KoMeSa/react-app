@@ -1,13 +1,14 @@
 import './style/App.scss';
 import RUserList from './components/RUserList';
 import RButton from './components/UI/button/RButton';
+import RLoader from './components/UI/loader/RLoader';
 import UserForm from './components/UserForm';
 import UserFilter from './components/UserFilter';
 import { useState, useEffect } from 'react';
 import RModal from './components/UI/modal/RModal';
 import { useUsers } from './hooks/useUsers'
+import { useFetching } from './hooks/useFetching'
 import UserService from './API/UserService'
-// import axios from 'axios'
 
 function App() {
 
@@ -17,14 +18,14 @@ function App() {
   //hook to filter users
   const sortedAndSearchedUsers = useUsers(users, filter.sort, filter.query)
 
+  const [fetchUsers, isUserLoading, userError] = useFetching(async () => {
+    const data = await UserService.getUsers();
+    setUsers(data)
+  })
+
   useEffect(() => {
     fetchUsers();
   }, [])
-
-  async function fetchUsers() {
-    const data = await UserService.getUsers();
-    setUsers(data)
-  }
 
 
   const createUser = (newUser) => {
@@ -47,7 +48,12 @@ function App() {
         <UserFilter filter={filter} setFilter={setFilter} />
       </div>
       <div className='container'>
-        <RUserList remove={removeUser} users={sortedAndSearchedUsers}></RUserList>
+        {userError && <h1>${userError}</h1>}
+        {isUserLoading 
+        ? <RLoader /> 
+        : <RUserList remove={removeUser} users={sortedAndSearchedUsers}></RUserList>}
+
+
       </div>
     </div>
   );
