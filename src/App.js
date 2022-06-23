@@ -19,8 +19,8 @@ function App() {
   const sortedAndSearchedUsers = useUsers(users, filter.sort, filter.query)
 
   const [fetchUsers, isUserLoading, userError] = useFetching(async () => {
-    const data = await UserService.getUsers();
-    setUsers(data)
+    const usersData = await UserService.getUsers();
+    setUsers(usersData)
   })
 
   useEffect(() => {
